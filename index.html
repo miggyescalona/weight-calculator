@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+	<style>
+		body{
+			margin-top:70px;
+			background:#333;
+			color:#fff;
+		}
+	</style>
+	<title>Weight Converter</title>
+</head>
+<body>	
+	<div class="container">
+		<div class="row">
+			<div class="col-md-6 offset-md-3">
+				<h1 class="display-4 text-center mb-3">Weight Converter</h1>
+				<div class="row">
+					<div class="col-md-8">
+						<form>
+							<div class="form-group">
+								<input 
+								id="weightInput"
+								type="number" 
+								class="form-control form-control-lg" 
+								placeholder="Enter Weight...">
+							</div>
+						</form>
+					</div>
+					<div class="col-md-4">
+						<form>
+							<div class="form-group">
+								<select 
+								id="weightTypeInput"
+								class="form-control form-control-lg" 
+								placeholder="Weight Type">
+								<option>Pounds</option>
+								<option>Grams</option>
+								<option>Kilograms</option>
+								<option>Ounces</option>
+								</select>
+							</div>
+						</form>
+					</div>
+				</div>	
+				<div id="output">
+					<div class="card bg-warning mb-2 p-4" id="poundsCard">
+						<div class="card-block">
+							<h4>Pounds:</h4>
+							<div id="poundsOutput"></div>
+						</div>
+					</div>
+					<div class="card bg-primary mb-2 p-4" id="gramsCard">
+						<div class="card-block">
+							<h4>Grams:</h4>
+							<div id="gramsOutput"></div>
+						</div>
+					</div>
+
+					<div class="card bg-success mb-2 p-4" id="kgCard">
+						<div class="card-block">
+							<h4>Kilograms:</h4>
+							<div id="kgOutput"></div>
+						</div>
+					</div>
+
+					<div class="card bg-danger mb-2 p-4" id="ozCard">
+						<div class="card-block">
+							<h4>Ounces:</h4>
+							<div id="ozOutput"></div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	 <div class="footer-copyright text-center">
+        some generic footer |
+        <a href="https://github.com/miggyescalona"> miggyescalona</a>
+    </div>
+
+	<script type="text/javascript">
+		document.getElementById('output').style.visibility = 'hidden';
+		document.getElementById("weightTypeInput").addEventListener('change',calculate);
+		document.getElementById('weightInput').addEventListener('input', calculate)
+
+		function calculate(){
+			clearAll();
+			document.getElementById('output').style.visibility = 'visible';
+			var input = document.getElementById("weightTypeInput").value;
+			var weight = document.getElementById("weightInput").value;
+			
+			if(input == "Pounds"){
+				poundsInput(weight);
+			}
+
+			if(input == "Grams"){
+				gramsInput(weight);
+			}
+
+
+			if(input == "Kilograms"){
+				kilogramsInput(weight);
+			}
+
+
+			if(input == "Ounces"){
+				ouncesInput(weight);
+			}
+
+		};
+
+		function poundsInput(weight){
+			///Display Type
+			document.getElementById('poundsCard').style.display = 'none';
+			document.getElementById('gramsCard').style.display = 'block';
+			document.getElementById('kgCard').style.display = 'block';
+			document.getElementById('ozCard').style.display = 'block';
+			///Calculate
+			document.getElementById('gramsOutput').innerHTML= weight / 0.0022046;
+			document.getElementById('kgOutput').innerHTML= weight / 2.2046;
+			document.getElementById('ozOutput').innerHTML= weight * 16;
+		}
+
+		function gramsInput(weight){
+			///DisplayType
+			document.getElementById('gramsCard').style.display = 'none';
+			document.getElementById('poundsCard').style.display = 'block';
+			document.getElementById('kgCard').style.display = 'block';
+			document.getElementById('ozCard').style.display = 'block';
+			///Calculate
+			document.getElementById('poundsOutput').innerHTML= weight * 0.0022046;
+			document.getElementById('kgOutput').innerHTML= weight / 1000;
+			document.getElementById('ozOutput').innerHTML= weight / 28.34952313;
+		}
+
+		function kilogramsInput(weight){
+			///DisplayType
+			document.getElementById('kgCard').style.display = 'none';
+			document.getElementById('gramsCard').style.display = 'block';
+			document.getElementById('poundsCard').style.display = 'block';
+			document.getElementById('ozCard').style.display = 'block';
+			///Calculate
+			document.getElementById('poundsOutput').innerHTML= weight * 2.2046226218;
+			document.getElementById('gramsOutput').innerHTML= weight * 1000;
+			document.getElementById('ozOutput').innerHTML= weight * 35.274;
+		}
+
+		function ouncesInput(weight){
+			///DisplayType
+			document.getElementById('ozCard').style.display = 'none';
+			document.getElementById('kgCard').style.display = 'block';
+			document.getElementById('gramsCard').style.display = 'block';
+			document.getElementById('poundsCard').style.display = 'block';
+			///Calculate
+			document.getElementById('poundsOutput').innerHTML= weight / 16;
+			document.getElementById('gramsOutput').innerHTML= weight * 28.35;
+			document.getElementById('kgOutput').innerHTML= (weight / 16) / 2.2;
+		}
+		
+		function clearAll(){
+			document.getElementById('poundsOutput').innerHTML= 0;
+			document.getElementById('kgOutput').innerHTML= 0;
+			document.getElementById('ozOutput').innerHTML= 0;
+			document.getElementById('gramsOutput').innerHTML= 0;
+		}
+	</script>
+</body>
+</html>
