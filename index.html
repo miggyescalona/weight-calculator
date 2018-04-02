@@ -82,7 +82,11 @@
     </div>
 
 	<script type="text/javascript">
+
+
 		document.getElementById('output').style.visibility = 'hidden';
+
+		///Event Listeners
 		document.getElementById("weightTypeInput").addEventListener('change',calculate);
 		document.getElementById('weightInput').addEventListener('input', calculate)
 
@@ -112,12 +116,18 @@
 
 		};
 
+		var outputArray = ["poundsOutput","kgOutput","ozOutput","gramsOutput"];
+		var cardArray = ["ozCard","kgCard","gramsCard","poundsCard"];
 		function poundsInput(weight){
 			///Display Type
-			document.getElementById('poundsCard').style.display = 'none';
-			document.getElementById('gramsCard').style.display = 'block';
-			document.getElementById('kgCard').style.display = 'block';
-			document.getElementById('ozCard').style.display = 'block';
+			for(var i = 0; i<cardArray.length;i++){
+				if(cardArray[i] == "poundsCard"){
+					document.getElementById(cardArray[i]).style.display = 'none';
+				}
+				else{
+					document.getElementById(cardArray[i]).style.display = 'block';
+				}
+			}
 			///Calculate
 			document.getElementById('gramsOutput').innerHTML= weight / 0.0022046;
 			document.getElementById('kgOutput').innerHTML= weight / 2.2046;
@@ -126,10 +136,14 @@
 
 		function gramsInput(weight){
 			///DisplayType
-			document.getElementById('gramsCard').style.display = 'none';
-			document.getElementById('poundsCard').style.display = 'block';
-			document.getElementById('kgCard').style.display = 'block';
-			document.getElementById('ozCard').style.display = 'block';
+			for(var i = 0; i<cardArray.length;i++){
+				if(cardArray[i] == "gramsCard"){
+					document.getElementById(cardArray[i]).style.display = 'none';
+				}
+				else{
+					document.getElementById(cardArray[i]).style.display = 'block';
+				}
+			}
 			///Calculate
 			document.getElementById('poundsOutput').innerHTML= weight * 0.0022046;
 			document.getElementById('kgOutput').innerHTML= weight / 1000;
@@ -138,10 +152,14 @@
 
 		function kilogramsInput(weight){
 			///DisplayType
-			document.getElementById('kgCard').style.display = 'none';
-			document.getElementById('gramsCard').style.display = 'block';
-			document.getElementById('poundsCard').style.display = 'block';
-			document.getElementById('ozCard').style.display = 'block';
+			for(var i = 0; i<cardArray.length;i++){
+				if(cardArray[i] == "kgCard"){
+					document.getElementById(cardArray[i]).style.display = 'none';
+				}
+				else{
+					document.getElementById(cardArray[i]).style.display = 'block';
+				}
+			}
 			///Calculate
 			document.getElementById('poundsOutput').innerHTML= weight * 2.2046226218;
 			document.getElementById('gramsOutput').innerHTML= weight * 1000;
@@ -150,10 +168,14 @@
 
 		function ouncesInput(weight){
 			///DisplayType
-			document.getElementById('ozCard').style.display = 'none';
-			document.getElementById('kgCard').style.display = 'block';
-			document.getElementById('gramsCard').style.display = 'block';
-			document.getElementById('poundsCard').style.display = 'block';
+			for(var i = 0; i<cardArray.length;i++){
+				if(cardArray[i] == "ozCard"){
+					document.getElementById(cardArray[i]).style.display = 'none';
+				}
+				else{
+					document.getElementById(cardArray[i]).style.display = 'block';
+				}
+			}
 			///Calculate
 			document.getElementById('poundsOutput').innerHTML= weight / 16;
 			document.getElementById('gramsOutput').innerHTML= weight * 28.35;
@@ -161,10 +183,9 @@
 		}
 		
 		function clearAll(){
-			document.getElementById('poundsOutput').innerHTML= 0;
-			document.getElementById('kgOutput').innerHTML= 0;
-			document.getElementById('ozOutput').innerHTML= 0;
-			document.getElementById('gramsOutput').innerHTML= 0;
+			for(var i = 0; i<outputArray.length;i++){
+				document.getElementById(outputArray[i]).innerHTML = 0;
+			}
 		}
 	</script>
 </body>
